@@ -14,46 +14,8 @@ The goal is to showcase real-world skills used in SRE and Cloud/DevOps engineeri
 
 ## Architecture
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                  Google Cloud Platform                          │
-│                  gcp-gke-gitops-487712                          │
-│                                                                 │
-│  ┌─────────────┐     ┌──────────────────────────────────────┐  │
-│  │  Terraform  │────▶│         GKE Cluster                  │  │
-│  │  (IaC)      │     │         e2-standard-2 · 1 node       │  │
-│  └─────────────┘     │                                      │  │
-│                      │  ┌─────────────────────────────────┐ │  │
-│  ┌─────────────┐     │  │  namespace: argocd              │ │  │
-│  │   GitHub    │────▶│  │  ┌──────────────────────────┐  │ │  │
-│  │    Repo     │sync │  │  │        ArgoCD            │  │ │  │
-│  └─────────────┘     │  │  │   GitOps sync engine     │  │ │  │
-│                      │  │  └────────────┬─────────────┘  │ │  │
-│  ┌─────────────┐     │  └──────────────┼─────────────────┘ │  │
-│  │  Artifact   │     │                 │ deploys            │  │
-│  │  Registry   │────▶│  ┌──────────────▼─────────────────┐ │  │
-│  └─────────────┘     │  │  namespace: default            │ │  │
-│                      │  │  ┌──────────┐  ┌────────────┐  │ │  │
-│                      │  │  │ App Pod  │─▶│  LB Svc    │──┼─┼──▶ 🌍
-│                      │  │  │  nginx   │  │ Public IP  │  │ │  │
-│                      │  │  └──────────┘  └────────────┘  │ │  │
-│                      │  └────────────────────────────────┘ │  │
-│                      │                 │ deploys            │  │
-│                      │  ┌──────────────▼─────────────────┐ │  │
-│                      │  │  namespace: monitoring         │ │  │
-│                      │  │  ┌────────────┐ ┌───────────┐  │ │  │
-│                      │  │  │ Prometheus │▶│  Grafana  │──┼─┼──▶ 🌍
-│                      │  │  │ (metrics)  │ │(dashboard)│  │ │  │
-│                      │  │  └─────▲──────┘ └───────────┘  │ │  │
-│                      │  │        │ scrapes                │ │  │
-│                      │  │  ┌─────┴──────────────────────┐ │ │  │
-│                      │  │  │ node-exporter · kube-state │ │ │  │
-│                      │  └──┴────────────────────────────┴─┘ │  │
-│                      └──────────────────────────────────────┘  │
-└─────────────────────────────────────────────────────────────────┘
-```
+![GKE GitOps Architecture](gcp-gke-gitops/media/gke_gitops_architecture_v2.svg)
 
----
 
 ## Stack
 
@@ -69,6 +31,7 @@ The goal is to showcase real-world skills used in SRE and Cloud/DevOps engineeri
 | Source Control | GitHub | Single source of truth for all manifests |
 
 ---
+
 
 ## Repository Structure
 
@@ -94,6 +57,8 @@ The goal is to showcase real-world skills used in SRE and Cloud/DevOps engineeri
 │   └── providers.tf
 └── README.md
 ```
+
+![Repository Tree](gcp-gke-gitops/media/tree.png)
 
 ---
 
@@ -185,14 +150,19 @@ ArgoCD will automatically sync and deploy everything from this repository.
 ### 5 — Access services
 
 ```bash
+
 # ArgoCD UI
 kubectl port-forward svc/argocd-server -n argocd 8080:443
 # → https://localhost:8080
+
+![ArgoCD UI](gcp-gke-gitops/media/argocd-ui.png)
 
 # Grafana external IP
 kubectl get svc -n monitoring | grep grafana
 # → http://<EXTERNAL-IP>  (admin / admin123)
 ```
+
+![Grafana Dashboard](gcp-gke-gitops/media/grafana-dashboard.png)
 
 ---
 
