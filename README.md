@@ -14,7 +14,7 @@ The goal is to showcase real-world skills used in SRE and Cloud/DevOps engineeri
 
 ## Architecture
 
-![GKE GitOps Architecture](gcp-gke-gitops/media/gke_gitops_architecture_v2.svg)
+![GKE GitOps Architecture](media/gke_gitops_architecture_v2.svg)
 
 
 ## Stack
@@ -58,7 +58,7 @@ The goal is to showcase real-world skills used in SRE and Cloud/DevOps engineeri
 └── README.md
 ```
 
-![Repository Tree](gcp-gke-gitops/media/tree.png)
+![Repository Tree](media/tree.png)
 
 ---
 
@@ -162,7 +162,7 @@ kubectl get svc -n monitoring | grep grafana
 # → http://<EXTERNAL-IP>  (admin / admin123)
 ```
 
-![Grafana Dashboard](gcp-gke-gitops/media/grafana-dashboard.png)
+![Grafana Dashboard](media/grafana-dashboard.png)
 
 ---
 
