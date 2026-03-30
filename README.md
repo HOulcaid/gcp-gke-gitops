@@ -161,7 +161,10 @@ kubectl port-forward svc/argocd-server -n argocd 8080:443
 kubectl get svc -n monitoring | grep grafana
 # → http://<EXTERNAL-IP>  (admin / admin123)
 ```
+### ArgoCD Dashboard
 ![ArgoCD Dashboard](media/argocd-ui.png)
+
+### Grafana Dashboard
 ![Grafana Dashboard](media/grafana-dashboard.png)
 
 ---
