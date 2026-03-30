@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: hello-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/HOulcaid/gcp-gke-gitops-487712
+    targetRevision: HEAD
+    path: apps/app
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
