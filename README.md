@@ -14,7 +14,7 @@ The goal is to showcase real-world skills used in SRE and Cloud/DevOps engineeri
 
 ## Architecture
 
-![GKE GitOps Architecture](media/gke_gitops_architecture_v2.svg)
+![GKE GitOps Architecture](media/gke_gitops_architecture_v2.png)
 
 
 ## Stack
