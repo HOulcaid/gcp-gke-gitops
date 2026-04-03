@@ -28,10 +28,13 @@ resource "google_container_node_pool" "nodes" {
   name       = "default-pool"
   location   = var.zone
   cluster    = google_container_cluster.primary.name
-  node_count = 1
+  autoscaling {
+  min_node_count = 1
+  max_node_count = 3
+}
 
   node_config {
-    machine_type = "e2-standard-2"
+    machine_type = "e2-standard-2" # increased to comfortably run system pods, ArgoCD, and Grafana
     disk_size_gb = 50
     service_account = google_service_account.gke_nodes.email
     oauth_scopes = [
@@ -39,6 +42,7 @@ resource "google_container_node_pool" "nodes" {
     ]
   }
 }
+
 
 resource "google_artifact_registry_repository_iam_member" "node_pull" {
   location   = var.region
