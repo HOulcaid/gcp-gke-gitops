@@ -6,9 +6,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/HOulcaid/gcp-gke-gitops-487712
+    repoURL: https://github.com/HOulcaid/gcp-gke-gitops
     targetRevision: HEAD
-    path: apps/app
+    path: app/app
   destination:
     server: https://kubernetes.default.svc
     namespace: default
