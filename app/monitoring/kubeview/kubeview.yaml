@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kubeview
+  namespace: monitoring
+spec:
+  project: default
+
+  source:
+    repoURL: https://benc-uk.github.io/kubeview/charts
+    chart: kubeview
+    targetRevision: 0.1.31
+    helm:
+      values: |
+        service:
+          type: ClusterIP
+
+        resources:
+          requests:
+            cpu: 50m
+            memory: 64Mi
+          limits:
+            cpu: 100m
+            memory: 128Mi
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: kubeview
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
