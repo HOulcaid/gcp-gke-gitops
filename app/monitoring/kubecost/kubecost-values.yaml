@@ -1,0 +1,54 @@
+# kubecost-values.yaml
+# Production-ready Kubecost configuration
+
+# Kubecost token for premium features (optional for basic use)
+kubecostToken: "YOUR_TOKEN_HERE"
+
+# Enable persistent storage for cost data retention
+persistentVolume:
+  # Enable persistent storage to retain data across restarts
+  enabled: true
+  # Storage size for cost data (adjust based on cluster size)
+  size: 32Gi
+  # Use your cluster's default storage class or specify one
+  storageClass: "standard"
+
+# Resource requests and limits for the cost-analyzer pod
+kubecostModel:
+  resources:
+    requests:
+      # Minimum CPU required for cost calculations
+      cpu: "100m"
+      # Minimum memory for storing cost data
+      memory: "256Mi"
+    limits:
+      # Maximum CPU allocation
+      cpu: "1000m"
+      # Maximum memory allocation
+      memory: "2Gi"
+
+# Prometheus configuration (Kubecost includes its own Prometheus)
+prometheus:
+  server:
+    # Retain 15 days of metrics for cost analysis
+    retention: 15d
+    persistentVolume:
+      # Enable persistent storage for Prometheus
+      enabled: true
+      size: 32Gi
+
+# Network costs tracking (requires cloud provider integration)
+networkCosts:
+  # Enable network cost tracking
+  enabled: true
+  # Prometheus port for network metrics
+  prometheusScrape: true
+
+# Grafana dashboards for visualization
+grafana:
+  # Enable Grafana for additional dashboards
+  enabled: true
+  # Use persistent storage for Grafana dashboards
+  persistence:
+    enabled: true
+    size: 5Gi
