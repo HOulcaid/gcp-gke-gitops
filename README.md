@@ -167,6 +167,8 @@ kubectl get svc -n monitoring | grep grafana
 ### Grafana Dashboard
 ![Grafana Dashboard](media/grafana-dashboard.png)
 
+### Kubeview Dashboard
+![Kubeview Dashboard](media/kubeview-ui.png)
 ---
 
 ## GitOps Workflow
