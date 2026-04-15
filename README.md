@@ -203,6 +203,15 @@ Any change to the cluster that does not come from Git is automatically reverted 
 
 ## Cost Management
 
+
+I've added [kubecost](https://www.apptio.com/products/kubecost/) a dashboard to have an insight on the costs and manage it: 
+
+
+![Kubecost Dashboard](media/kubecost-ui.png)
+
+
+### Clean up
+
 To pause the cluster and preserve free credits:
 
 ```bash
